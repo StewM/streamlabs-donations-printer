@@ -75,6 +75,7 @@ app.on('activate', () => {
 ipcMain.on('update-config', (event, args) => {
   store.dispatch('set_selected_printer', args.selectedPrinter)
   store.dispatch('set_min_donation', args.minDonation)
+  store.dispatch('set_min_color', args.minColor)
 })
 
 ipcMain.on('start-printer', (event, arg) => {
@@ -82,6 +83,7 @@ ipcMain.on('start-printer', (event, arg) => {
   let options = {
     printer: store.state.Main.selectedPrinter,
     minDonation: store.state.Main.minimumDonation,
+    minColor: store.state.Main.minColor,
     socketToken: authService.getSocketToken()
   }
   socket = printService.startListening(options)
