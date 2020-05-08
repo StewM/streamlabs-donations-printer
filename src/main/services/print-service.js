@@ -66,12 +66,22 @@ function startListening(options) {
                     if (image) {
                         doc.fontSize(24)
                         doc.text('- ' + message.from, 72, 510, { align: 'right' })
-                        doc.fontSize(20)
-                        doc.text('"' + text + '"', 72, 460, { align: 'center' })
+                        if(text.length>0){
+                            doc.fontSize(20)
+                            doc.text('"' + text + '"', 72, 460, { align: 'center' })
+                        }
                     } else {
                         doc.moveDown(3)
-                        doc.fontSize(34)
-                        doc.text('"' + text + '"', { align: 'center', width: 648 })
+                        if(text.length>0){
+                            let fontSize = 34
+                            if(text.length <= 64) {
+                                fontSize = 54
+                            } else if(text.length <= 128) {
+                                fontSize = 44
+                            }
+                            doc.fontSize(fontSize)
+                            doc.text('"' + text + '"', { align: 'center', width: 648 })
+                        }
                         doc.fontSize(24)
                         doc.text('- ' + message.from, 72, 510, { align: 'right' })
                     }
