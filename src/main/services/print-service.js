@@ -51,7 +51,8 @@ function startListening(options) {
                 let text = message.message.replace(imageRegex, '').trim()
 
                 let doc = new PDFDocument({ layout: 'landscape' })
-                doc.pipe(fs.createWriteStream(`./pdfs/${id}.pdf`))
+                let writeStream = fs.createWriteStream(`./pdfs/${id}.pdf`)
+                doc.pipe(writeStream)
 
                 doc.fontSize(24)
                 doc.text(message.formattedAmount)
@@ -110,11 +111,13 @@ function startListening(options) {
 
                             doc.end()
 
-                            return Promise.resolve()
-                        }).then(value => {
-                            ptp.print(`./pdfs/${id}.pdf`, {
-                                printer: options.printer
+                            writeStream.on('close', () => {
+                                ptp.print(`./pdfs/${id}.pdf`, {
+                                    printer: options.printer
+                                })
                             })
+
+                            return Promise.resolve()
                         })
                     })
                 } else {
