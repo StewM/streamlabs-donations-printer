@@ -8,8 +8,9 @@
                     <b-form-select v-model="selectedPrinter" :options="printerOptions" class="mb-3"></b-form-select>
                     <h3>Minimum Donation</h3>
                     <b-form-input v-model="minDonation" type="number" class="mb-3"></b-form-input>
-                    <h3>Minimum Donation for Color</h3>
-                    <b-form-input v-model="minColor" type="number" class="mb-3"></b-form-input>
+                    <b-form-checkbox v-model="printColor">Print in color</b-form-checkbox>
+                    <h4 v-if="printColor">Minimum Donation for Color</h4>
+                    <b-form-input v-model="minColor" type="number" class="mb-3" v-if="printColor"></b-form-input>
                     <b-button @click="saveConfig" variant="success">Save</b-button>
                 </b-col>
             </b-row>
@@ -27,7 +28,8 @@ export default {
         return {
             selectedPrinter: null,
             minDonation: 0,
-            minColor: 0
+            minColor: 0,
+            printColor: false
         }
     },
     computed: {
@@ -46,7 +48,8 @@ export default {
             let values = {
                 selectedPrinter: this.selectedPrinter,
                 minDonation: this.minDonation,
-                minColor: this.minColor
+                minColor: this.minColor,
+                printColor: this.printColor
             }
 
             this.$electron.ipcRenderer.send('update-config', values)
@@ -59,6 +62,7 @@ export default {
         this.selectedPrinter = this.$store.state.Main.selectedPrinter
         this.minDonation = this.$store.state.Main.minimumDonation
         this.minColor = this.$store.state.Main.minColor
+        this.printColor = this.$store.state.Main.printColor
     }
 }
 </script>

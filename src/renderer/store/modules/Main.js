@@ -4,6 +4,7 @@ const state = {
     selectedPrinter: '',
     minimumDonation: 0,
     running: false,
+    printColor: false,
     minColor: 0
 }
 
@@ -22,6 +23,9 @@ const mutations = {
     },
     set_min_color(state, amount) {
         state.minColor = amount
+    },
+    set_print_color(state, value) {
+        state.printColor = value
     },
     start_running(state) {
         state.running = true
@@ -46,6 +50,9 @@ const actions = {
     },
     set_min_color({ commit }, amount) {
         commit('set_min_color', amount)
+    },
+    set_print_color({ commit }, value) {
+        commit('set_print_color', value)
     },
     start_running({ commit }) {
         commit('start_running')
