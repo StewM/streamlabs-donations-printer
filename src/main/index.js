@@ -17,6 +17,8 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
+store.dispatch('set_version', app.getVersion())
+
 // create pdf folder if it doesn't exist
 if (!fs.existsSync('./pdfs')) {
   fs.mkdirSync('./pdfs');

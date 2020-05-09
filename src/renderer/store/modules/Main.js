@@ -1,16 +1,16 @@
 const state = {
-    token: '',
     printers: [],
     selectedPrinter: '',
     minimumDonation: 0,
     running: false,
     printColor: false,
-    minColor: 0
+    minColor: 0,
+    version: ''
 }
 
 const mutations = {
-    set_token(state, token) {
-        state.token = token
+    set_version(state, version) {
+        state.version = version
     },
     set_printers(state, printers) {
         state.printers = printers
@@ -36,8 +36,8 @@ const mutations = {
 }
 
 const actions = {
-    set_token({ commit }, token) {
-        commit('set_token', token)
+    set_version({ commit }, version) {
+        commit('set_version', version)
     },
     set_printers({ commit }, printers) {
         commit('set_printers', printers)

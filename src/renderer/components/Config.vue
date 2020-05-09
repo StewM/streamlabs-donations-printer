@@ -4,6 +4,7 @@
         <b-container>
             <b-row>
                 <b-col>
+                    <h1>Streamlabs Donation Printer v{{ $store.state.Main.version }}</h1>
                     <h3>Printer</h3>
                     <b-form-select v-model="selectedPrinter" :options="printerOptions" class="mb-3"></b-form-select>
                     <h3>Minimum Donation</h3>
