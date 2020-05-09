@@ -8,6 +8,7 @@
                     <b-form-select v-model="selectedPrinter" :options="printerOptions" class="mb-3"></b-form-select>
                     <h3>Minimum Donation</h3>
                     <b-form-input v-model="minDonation" type="number" class="mb-3"></b-form-input>
+                    <h3>Minimum Donation for Color</h3>
                     <b-form-input v-model="minColor" type="number" class="mb-3"></b-form-input>
                     <b-button @click="saveConfig" variant="success">Save</b-button>
                 </b-col>

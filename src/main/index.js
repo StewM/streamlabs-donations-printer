@@ -7,7 +7,6 @@ import printService from './services/print-service'
 import store from '../renderer/store'
 const fs = require('fs')
 const path = require('path')
-const printerService = require('printer')
 
 
 /**
@@ -38,14 +37,9 @@ store.dispatch('stop_running')
 
 let socket
 
-// get printer names and put in the store
-let printers = printerService.getPrinters()
-let printerNames = []
-printers.forEach(printer => {
-  printerNames.push(printer.name)
-});
-
-store.dispatch('set_printers', printerNames)
+printService.getPrinters().then( printers => {
+  store.dispatch('set_printers', printers)
+})
 
 let mainWindow
 

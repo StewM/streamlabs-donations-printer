@@ -105,6 +105,11 @@ function startListening(options) {
     return streamlabs
 }
 
+async function getPrinters() {
+    return ptp.getPrinters()
+}
+
 export default {
-    startListening
+    startListening,
+    getPrinters
 }
