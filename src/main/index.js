@@ -1,8 +1,5 @@
-require('dotenv').config()
 import { app, ipcMain } from 'electron'
-import createAuthWindow from './services/auth-process'
 import createAppWindow from './services/app-process'
-import authService from './services/auth-service'
 import printService from './services/print-service'
 import store from '../renderer/store'
 const fs = require('fs')
@@ -50,10 +47,12 @@ fs.readdir('images', (err, files) => {
   }
 })
 
+// ensure that the current state of the store isn't running
 store.dispatch('stop_running')
 
 let socket
 
+// get printers
 printService.getPrinters().then(printers => {
   store.dispatch('set_printers', printers)
 })
@@ -61,12 +60,7 @@ printService.getPrinters().then(printers => {
 let mainWindow
 
 async function createWindow() {
-  try {
-    await authService.refreshTokens()
-    mainWindow = createAppWindow()
-  } catch (err) {
-    createAuthWindow()
-  }
+  mainWindow = createAppWindow()
 }
 
 app.on('ready', createWindow)
@@ -88,6 +82,7 @@ ipcMain.on('update-config', (event, args) => {
   store.dispatch('set_min_donation', args.minDonation)
   store.dispatch('set_min_color', args.minColor)
   store.dispatch('set_print_color', args.printColor)
+  store.dispatch('set_api_token', args.apiToken)
 })
 
 ipcMain.on('start-printer', (event, arg) => {
@@ -97,7 +92,7 @@ ipcMain.on('start-printer', (event, arg) => {
     minDonation: store.state.Main.minimumDonation,
     minColor: store.state.Main.minColor,
     printColor: store.state.Main.printColor,
-    socketToken: authService.getSocketToken()
+    socketToken: store.state.Main.apiToken
   }
   socket = printService.startListening(options)
 })
@@ -130,10 +125,6 @@ ipcMain.on('stop-printer', (event, arg) => {
   })
 })
 
-ipcMain.on('logout', (event, arg) => {
-  authService.logout()
-  app.quit()
-})
 
 /**
  * Auto Updater

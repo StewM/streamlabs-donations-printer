@@ -11,7 +11,8 @@ function createAppWindow() {
      * Initial window options
      */
     mainWindow = new BrowserWindow({
-        height: 563,
+        title: "Streamlabs Donations Printer",
+        height: 600,
         useContentSize: true,
         width: 1000,
         webPreferences: {

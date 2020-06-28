@@ -1,12 +1,13 @@
 {
   "name": "streamlabs-donations-printer",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "author": "Stewart Mink <stewart.mink@gmail.com>",
   "description": "Streamlabs Donations Printer",
-  "license": null,
+  "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
-    "build": "node .electron-vue/build.js && electron-builder",
+    "build": "node .electron-vue/build.js",
+    "builder": "electron-builder",
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
     "build:clean": "cross-env BUILD_TARGET=clean node .electron-vue/build.js",
     "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
@@ -18,7 +19,7 @@
     "rebuild": "./node_modules/.bin/electron-rebuild"
   },
   "build": {
-    "productName": "streamlabs-donations-printer",
+    "productName": "Streamlabs Donations Printer",
     "appId": "com.stew.donationsprinter",
     "directories": {
       "output": "build"
@@ -52,14 +53,14 @@
     }
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.29",
+    "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@fortawesome/vue-fontawesome": "^0.1.10",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.13.0",
     "bufferutil": "^4.0.1",
-    "dotenv": "^8.2.0",
-    "dotenv-webpack": "^1.7.0",
     "jquery": "^3.5.1",
-    "keytar": "^5.6.0",
     "pdf-to-printer": "^1.4.0",
     "pdfkit": "^0.11.0",
     "probe-image-size": "^5.0.0",

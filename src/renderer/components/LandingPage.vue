@@ -20,7 +20,7 @@ export default {
   components: { Header },
   computed: {
     configured () {
-      if (this.$store.state.Main.selectedPrinter != '') return true
+      if (this.$store.state.Main.selectedPrinter != '' && this.$store.state.Main.apiToken != '') return true
 
       return false
     },

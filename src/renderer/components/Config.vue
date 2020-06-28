@@ -5,6 +5,13 @@
             <b-row>
                 <b-col>
                     <h1>Streamlabs Donation Printer v{{ $store.state.Main.version }}</h1>
+                    <h3 class="title">Socket API Token</h3>
+                    <font-awesome-icon icon="info-circle" id="token-tooltip" />
+                    <b-tooltip target="token-tooltip">
+                        You can get this from the Streamlabs settings in API Settings > API Tokens
+                    </b-tooltip>
+                    <b-form-input v-model="apiToken" :type="showToken ? 'text' : 'password'"></b-form-input>
+                    <b-form-checkbox v-model="showToken">Show Token</b-form-checkbox>
                     <h3>Printer</h3>
                     <b-form-select v-model="selectedPrinter" :options="printerOptions" class="mb-3"></b-form-select>
                     <h3>Minimum Donation</h3>
@@ -14,9 +21,6 @@
                     <b-form-input v-model="minColor" type="number" class="mb-3" v-if="printColor"></b-form-input>
                     <b-button @click="saveConfig" variant="success">Save</b-button>
                 </b-col>
-            </b-row>
-            <b-row>
-                <b-button @click="logout" variant="danger" class="mt-5">Logout and Close App</b-button>
             </b-row>
         </b-container>
     </div>
@@ -30,7 +34,9 @@ export default {
             selectedPrinter: null,
             minDonation: 0,
             minColor: 0,
-            printColor: false
+            printColor: false,
+            apiToken: null,
+            showToken: false
         }
     },
     computed: {
@@ -50,13 +56,11 @@ export default {
                 selectedPrinter: this.selectedPrinter,
                 minDonation: this.minDonation,
                 minColor: this.minColor,
-                printColor: this.printColor
+                printColor: this.printColor,
+                apiToken: this.apiToken
             }
 
             this.$electron.ipcRenderer.send('update-config', values)
-        },
-        logout() {
-            this.$electron.ipcRenderer.send('logout')
         }
     },
     mounted() {
@@ -64,6 +68,13 @@ export default {
         this.minDonation = this.$store.state.Main.minimumDonation
         this.minColor = this.$store.state.Main.minColor
         this.printColor = this.$store.state.Main.printColor
+        this.apiToken = this.$store.state.Main.apiToken
     }
 }
 </script>
+<style lang="scss" scoped>
+.title {
+    display: inline-block;
+    margin-right: 5px;
+}
+</style>

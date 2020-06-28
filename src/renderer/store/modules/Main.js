@@ -5,7 +5,8 @@ const state = {
     running: false,
     printColor: false,
     minColor: 0,
-    version: ''
+    version: '',
+    apiToken: ''
 }
 
 const mutations = {
@@ -26,6 +27,9 @@ const mutations = {
     },
     set_print_color(state, value) {
         state.printColor = value
+    },
+    set_api_token(state, value) {
+        state.apiToken = value
     },
     start_running(state) {
         state.running = true
@@ -53,6 +57,9 @@ const actions = {
     },
     set_print_color({ commit }, value) {
         commit('set_print_color', value)
+    },
+    set_api_token({ commit }, value) {
+        commit('set_api_token', value)
     },
     start_running({ commit }) {
         commit('start_running')
