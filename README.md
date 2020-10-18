@@ -2,6 +2,8 @@
 
 > Streamlabs Donations Printer
 
+Full Readme coming soon, still a work in progress.
+
 #### Build Setup
 
 ``` bash
