@@ -1,8 +1,21 @@
-# streamlabs-donations-printer
+# Streamlabs Donation Printer
 
-> Streamlabs Donations Printer
+This is an electron app that you can connect to your Streamlabs account to print out donations from your real, physical printer. It will parse the donation message for a JPEG or PNG image link and include it in the print. It has options for setting donation threshholds and black and white prints. Warning: there is no filter for image or message content, so whatever your donators send will just print.
 
-Full Readme coming soon, still a work in progress.
+## Installation and Usage
+
+* Download the latest version from the [Releases Page](https://github.com/StewM/streamlabs-donations-printer/releases)
+  * The installer will overwrite itself when you install a new version
+* Run the app and click Config at the top right to open the configuration page
+* Add your Streamlabs Socket API Token which you can get from the API Tokens tab in your [Streamlabs API Settings](https://streamlabs.com/dashboard#/settings/api-settings)
+* Choose the printer you wish to print to from the dropdown
+* Choose the minimum donation value you wish to print, and if you wish to print in color check the box and set the minimum for that as well
+* Click Save and then click the title at the top left to return to the main page
+* The Start Printer button should now be enabled, simply click the button to start listening for and printing donations
+
+## Contribution
+
+If you find a bug or want to contribute, please open an issue or a pull request with your fix. The project is built in electron with Vue for the frontend. If you have any questions feel free to reach out to me.
 
 #### Build Setup
 
@@ -13,12 +26,7 @@ npm install
 # serve with hot reload at localhost:9080
 npm run dev
 
-# build electron application for production
+# build electron application for production, webpack build and electron build are separated for CI/CD
 npm run build
-
-
+npm run builder
 ```
-
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[45a3e22](https://github.com/SimulatedGREG/electron-vue/tree/45a3e224e7bb8fc71909021ccfdcfec0f461f634) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
