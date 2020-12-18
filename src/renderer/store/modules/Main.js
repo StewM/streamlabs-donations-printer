@@ -6,7 +6,10 @@ const state = {
     printColor: false,
     minColor: 0,
     version: '',
-    apiToken: ''
+    apiToken: '',
+    githubVersion: '',
+    newVersionLink: '',
+    showNewVersion: false
 }
 
 const mutations = {
@@ -36,6 +39,18 @@ const mutations = {
     },
     stop_running(state) {
         state.running = false
+    },
+    set_github_version(state, version) {
+        state.githubVersion = version
+    },
+    set_version_link(state, link) {
+        state.newVersionLink = link
+    },
+    show_new_version(state) {
+        state.showNewVersion = true
+    },
+    hide_new_version(state) {
+        state.showNewVersion = false
     }
 }
 
@@ -66,6 +81,18 @@ const actions = {
     },
     stop_running({ commit }) {
         commit('stop_running')
+    },
+    set_github_version({ commit }, version) {
+        commit('set_github_version', version)
+    },
+    set_version_link({ commit }, link) {
+        commit('set_version_link', link)
+    },
+    show_new_version({ commit }) {
+        commit('show_new_version')
+    },
+    hide_new_version({ commit }) {
+        commit('hide_new_version')
     }
 }
 

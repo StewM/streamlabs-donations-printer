@@ -1,9 +1,10 @@
-import { app, ipcMain } from 'electron'
+import { app, ipcMain, shell } from 'electron'
 import createAppWindow from './services/app-process'
 import printService from './services/print-service'
 import store from '../renderer/store'
 const fs = require('fs')
 const path = require('path')
+const axios = require('axios')
 
 
 /**
@@ -15,6 +16,21 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 store.dispatch('set_version', app.getVersion())
+
+const currentVersion = "v" + app.getVersion()
+
+// check for new version
+axios.get('https://api.github.com/repos/StewM/streamlabs-donations-printer/releases', {
+  headers: {
+    'accept': 'application/vnd.github.v3+json'
+  }
+}).then(function (response) {
+    store.dispatch('set_github_version', response.data[0].tag_name)
+    store.dispatch('set_version_link', response.data[0].html_url)
+    if(currentVersion != response.data[0].tag_name) {
+      store.dispatch('show_new_version')
+    }
+  })
 
 // create pdf folder if it doesn't exist
 if (!fs.existsSync('./pdfs')) {
@@ -123,6 +139,10 @@ ipcMain.on('stop-printer', (event, arg) => {
       })
     }
   })
+})
+
+ipcMain.on('open-link', (event, arg) => {
+  shell.openExternal(store.state.Main.newVersionLink)
 })
 
 

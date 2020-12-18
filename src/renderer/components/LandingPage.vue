@@ -9,15 +9,17 @@
         </b-col>
       </b-row>
     </b-container>
+    <NewVersion />
   </div>
 </template>
 
 <script>
 import Header from "./Header.vue";
+import NewVersion from "./NewVersion.vue"
 
 export default {
   name: "landing-page",
-  components: { Header },
+  components: { Header, NewVersion },
   computed: {
     configured () {
       if (this.$store.state.Main.selectedPrinter != '' && this.$store.state.Main.apiToken != '') return true
