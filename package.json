@@ -61,7 +61,7 @@
     "bootstrap-vue": "^2.21.1",
     "bufferutil": "^4.0.1",
     "jquery": "^3.5.1",
-    "pdf-to-printer": "^1.4.0",
+    "pdf-to-printer": "^1.5.2",
     "pdfkit": "^0.11.0",
     "portal-vue": "^2.1.7",
     "probe-image-size": "^5.0.0",
