@@ -25,6 +25,7 @@
                     <b-form-checkbox v-model="printColor">Print in color</b-form-checkbox>
                     <h4 v-if="printColor">Minimum Donation for Color</h4>
                     <b-form-input v-model="minColor" type="number" class="mb-3" v-if="printColor"></b-form-input>
+                    <b-form-checkbox v-model="enableSuperChats">Enable Super Chats (beta)</b-form-checkbox>
                     <b-button @click="saveConfig" variant="success">Save</b-button>
                 </b-col>
             </b-row>
@@ -45,7 +46,8 @@ export default {
             apiToken: null,
             showToken: false,
             selectedCurrency: 'USD',
-            enforceCurrency: true
+            enforceCurrency: true,
+            enableSuperChats: false
         }
     },
     computed: {
@@ -77,7 +79,8 @@ export default {
                 printColor: this.printColor,
                 apiToken: this.apiToken,
                 selectedCurrency: this.selectedCurrency,
-                enforceCurrency: this.enforceCurrency
+                enforceCurrency: this.enforceCurrency,
+                enableSuperChats: this.enableSuperChats
             }
 
             this.$electron.ipcRenderer.send('update-config', values)
@@ -91,6 +94,7 @@ export default {
         this.apiToken = this.$store.state.Main.apiToken
         this.selectedCurrency = this.$store.state.Main.selectedCurrency
         this.enforceCurrency = this.$store.state.Main.enforceCurrency
+        this.enableSuperChats = this.$store.state.Main.enableSuperChats
     }
 }
 </script>

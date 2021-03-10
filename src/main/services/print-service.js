@@ -46,7 +46,7 @@ function startListening(options) {
             printDonation(options, id, message, rawAmount, formattedAmount, from, currencyCheck)
         }
 
-        if (eventData.for === 'youtube_account' && eventData.type === 'superchat'){
+        if (options.enableSuperChats && eventData.for === 'youtube_account' && eventData.type === 'superchat'){
             let messageObj = eventData.message[0]
             let id = messageObj._id
             let message = messageObj.comment

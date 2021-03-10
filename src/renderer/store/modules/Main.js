@@ -11,7 +11,8 @@ const state = {
     newVersionLink: '',
     showNewVersion: false,
     selectedCurrency: 'USD',
-    enforceCurrency: true
+    enforceCurrency: true,
+    enableSuperChats: false
 }
 
 const mutations = {
@@ -59,6 +60,9 @@ const mutations = {
     },
     set_enforce_currency(state, enforce) {
         state.enforceCurrency = enforce
+    },
+    set_enable_superchats(state, enable) {
+        state.enableSuperChats = enable
     }
 }
 
@@ -107,6 +111,9 @@ const actions = {
     },
     set_enforce_currency({ commit }, enforce) {
         commit('set_enforce_currency', enforce)
+    },
+    set_enable_superchats({ commit }, enable) {
+        commit('set_enable_superchats', enable)
     }
 }
 

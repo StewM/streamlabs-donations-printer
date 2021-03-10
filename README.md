@@ -12,6 +12,7 @@ This is an electron app that you can connect to your Streamlabs account to print
 * Choose the currency for the minimum donation from the dropdown, this should be the same currency you choose for your donation settings in Streamlabs
   * The checkbox below this will only print donations in the same currency. This is to prevent comparing USD to JPY for example since I currently do not have a way to automatically convert for comparison in the app. If you're fine with this sort of comparison possibly happening, uncheck this box. Streamlabs seems to automatically convert donation amounts to your selected currency, but I am unsure if they do the same for Super Chats.
 * Choose the minimum donation value you wish to print, and if you wish to print in color check the box and set the minimum for that as well
+* If you want to use Super Chats, check the "Enable Super Chats" box
 * Click Save and then click the title at the top left to return to the main page
 * The Start Printer button should now be enabled, simply click the button to start listening for and printing donations
 

@@ -101,6 +101,7 @@ ipcMain.on('update-config', (event, args) => {
   store.dispatch('set_api_token', args.apiToken)
   store.dispatch('set_selected_currency', args.selectedCurrency)
   store.dispatch('set_enforce_currency', args.enforceCurrency)
+  store.dispatch('set_enable_superchats', args.enableSuperChats)
 })
 
 ipcMain.on('start-printer', (event, arg) => {
@@ -112,7 +113,8 @@ ipcMain.on('start-printer', (event, arg) => {
     printColor: store.state.Main.printColor,
     socketToken: store.state.Main.apiToken,
     selectedCurrency: store.state.Main.selectedCurrency,
-    enforceCurrency: store.state.Main.enforceCurrency
+    enforceCurrency: store.state.Main.enforceCurrency,
+    enableSuperChats: store.state.Main.enableSuperChats
   }
   socket = printService.startListening(options)
 })
