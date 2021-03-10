@@ -9,7 +9,9 @@ const state = {
     apiToken: '',
     githubVersion: '',
     newVersionLink: '',
-    showNewVersion: false
+    showNewVersion: false,
+    selectedCurrency: 'USD',
+    enforceCurrency: true
 }
 
 const mutations = {
@@ -51,6 +53,12 @@ const mutations = {
     },
     hide_new_version(state) {
         state.showNewVersion = false
+    },
+    set_selected_currency(state, currency) {
+        state.selectedCurrency = currency
+    },
+    set_enforce_currency(state, enforce) {
+        state.enforceCurrency = enforce
     }
 }
 
@@ -93,6 +101,12 @@ const actions = {
     },
     hide_new_version({ commit }) {
         commit('hide_new_version')
+    },
+    set_selected_currency({ commit }, currency) {
+        commit('set_selected_currency', currency)
+    },
+    set_enforce_currency({ commit }, enforce) {
+        commit('set_enforce_currency', enforce)
     }
 }
 

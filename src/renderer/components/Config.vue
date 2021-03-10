@@ -14,6 +14,12 @@
                     <b-form-checkbox v-model="showToken">Show Token</b-form-checkbox>
                     <h3>Printer</h3>
                     <b-form-select v-model="selectedPrinter" :options="printerOptions" class="mb-3"></b-form-select>
+                    <h3>Minimum Donation Currency</h3>
+                    <b-form-select v-model="selectedCurrency" :options="currencyOptions" class="mb-3"></b-form-select>
+                    <b-form-checkbox v-model="enforceCurrency">Only print donations in this currency <font-awesome-icon icon="info-circle" id="currency-tooltip" /></b-form-checkbox>
+                    <b-tooltip target="currency-tooltip">
+                        If this is not checked, the app will just compare the amounts directly as if they were the same currency. There is currently no conversion.
+                    </b-tooltip>
                     <h3>Minimum Donation</h3>
                     <b-form-input v-model="minDonation" type="number" class="mb-3"></b-form-input>
                     <b-form-checkbox v-model="printColor">Print in color</b-form-checkbox>
@@ -26,6 +32,7 @@
     </div>
 </template>
 <script>
+var cc = require('currency-codes')
 import Header from "./Header.vue"
 export default {
     components: {Header},
@@ -36,7 +43,9 @@ export default {
             minColor: 0,
             printColor: false,
             apiToken: null,
-            showToken: false
+            showToken: false,
+            selectedCurrency: 'USD',
+            enforceCurrency: true
         }
     },
     computed: {
@@ -48,6 +57,15 @@ export default {
             })
 
             return printers
+        },
+        currencyOptions() {
+            let codes = []
+            cc.codes().forEach(code => {
+                let data = cc.code(code)
+                let name = code + " - " + data.currency
+                codes.push({value: code, text: name})
+            })
+            return codes
         }
     },
     methods: {
@@ -57,7 +75,9 @@ export default {
                 minDonation: this.minDonation,
                 minColor: this.minColor,
                 printColor: this.printColor,
-                apiToken: this.apiToken
+                apiToken: this.apiToken,
+                selectedCurrency: this.selectedCurrency,
+                enforceCurrency: this.enforceCurrency
             }
 
             this.$electron.ipcRenderer.send('update-config', values)
@@ -69,6 +89,8 @@ export default {
         this.minColor = this.$store.state.Main.minColor
         this.printColor = this.$store.state.Main.printColor
         this.apiToken = this.$store.state.Main.apiToken
+        this.selectedCurrency = this.$store.state.Main.selectedCurrency
+        this.enforceCurrency = this.$store.state.Main.enforceCurrency
     }
 }
 </script>

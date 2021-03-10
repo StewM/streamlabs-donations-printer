@@ -60,6 +60,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.21.1",
     "bufferutil": "^4.0.1",
+    "currency-codes": "^2.1.0",
     "jquery": "^3.5.1",
     "pdf-to-printer": "^1.5.2",
     "pdfkit": "^0.11.0",

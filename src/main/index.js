@@ -99,6 +99,8 @@ ipcMain.on('update-config', (event, args) => {
   store.dispatch('set_min_color', args.minColor)
   store.dispatch('set_print_color', args.printColor)
   store.dispatch('set_api_token', args.apiToken)
+  store.dispatch('set_selected_currency', args.selectedCurrency)
+  store.dispatch('set_enforce_currency', args.enforceCurrency)
 })
 
 ipcMain.on('start-printer', (event, arg) => {
@@ -108,7 +110,9 @@ ipcMain.on('start-printer', (event, arg) => {
     minDonation: store.state.Main.minimumDonation,
     minColor: store.state.Main.minColor,
     printColor: store.state.Main.printColor,
-    socketToken: store.state.Main.apiToken
+    socketToken: store.state.Main.apiToken,
+    selectedCurrency: store.state.Main.selectedCurrency,
+    enforceCurrency: store.state.Main.enforceCurrency
   }
   socket = printService.startListening(options)
 })
