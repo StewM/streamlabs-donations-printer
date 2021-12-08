@@ -66,7 +66,7 @@ function startListening(options) {
 
 function printDonation(options, id, message, rawAmount, formattedAmount, from, currencyCheck) {
     if (currencyCheck && parseFloat(rawAmount) >= parseFloat(options.minDonation)) {
-        const imageRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)(?:jpg|png|JPG|PNG)/g
+        const imageRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)(?:jpe?g|png)/gi
 
         let images = message.match(imageRegex)
         let image
