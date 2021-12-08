@@ -64,9 +64,27 @@ function startListening(options) {
     return streamlabs
 }
 
+function tryImgurMatch(message) {
+    // fetching the direct link from an indirect link is as simple as
+    // adding an image file extension to it.
+    // fetching the direct link from an album link is more complicated
+    // so I haven't done it yet.
+    const imgurRegex = /https?:\/\/(www\.)?imgur\.com\/[a-zA-Z0-9]+/gi;
+    let imgurLink = message.match(imgurRegex);
+    if (imgurLink === null) {
+        return null
+    }
+    else {
+        // imgur will provide the direct image from adding this,
+        // regardless of if the original was a jpg or png.
+        image = imgurLink[0] + ".jpg"
+        return image
+    }
+}
+
 function printDonation(options, id, message, rawAmount, formattedAmount, from, currencyCheck) {
     if (currencyCheck && parseFloat(rawAmount) >= parseFloat(options.minDonation)) {
-        const imageRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/\/=]*)(?:jpe?g|png)/gi
+        const imageRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)(?:jpe?g|png)/gi
 
         let images = message.match(imageRegex)
         let image
@@ -74,7 +92,7 @@ function printDonation(options, id, message, rawAmount, formattedAmount, from, c
         if (Array.isArray(images)) {
             image = images[0]
         } else {
-            image = images
+            image = tryImgurMatch(message)
         }
 
         let text = message.replace(imageRegex, '').trim()
