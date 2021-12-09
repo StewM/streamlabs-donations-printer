@@ -109,7 +109,7 @@ function printDonation(options, id, message, rawAmount, formattedAmount, from, c
             // probe image size
             // put image in pdf
             let image_file_name = id
-            if (image.match(/\.(jpg|JPG)$/) != null) {
+            if (image.match(/\.(jpe?g)$/i) != null) {
                 image_file_name += ".jpg"
             } else {
                 image_file_name += ".png"
