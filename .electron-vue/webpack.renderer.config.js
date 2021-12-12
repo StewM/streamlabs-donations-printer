@@ -22,7 +22,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 let whiteListedModules = ['vue', 'bootstrap-vue']
 
 let rendererConfig = {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
   entry: {
     renderer: path.join(__dirname, '../src/renderer/main.js')
   },
@@ -78,7 +78,7 @@ let rendererConfig = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         use: {
           loader: 'url-loader',
-          query: {
+          options: {
             limit: 10000,
             name: 'imgs/[name]--[folder].[ext]'
           }
@@ -96,7 +96,7 @@ let rendererConfig = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         use: {
           loader: 'url-loader',
-          query: {
+          options: {
             limit: 10000,
             name: 'fonts/[name]--[folder].[ext]'
           }
@@ -158,8 +158,6 @@ if (process.env.NODE_ENV !== 'production') {
  * Adjust rendererConfig for production settings
  */
 if (process.env.NODE_ENV === 'production') {
-  rendererConfig.devtool = ''
-
   rendererConfig.plugins.push(
     new MinifyPlugin(),
     new CopyWebpackPlugin([
