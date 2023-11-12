@@ -56,7 +56,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@fortawesome/vue-fontawesome": "^0.1.10",
-    "axios": "^0.21.1",
+    "axios": "^1.6.0",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.21.1",
     "bufferutil": "^4.0.1",
