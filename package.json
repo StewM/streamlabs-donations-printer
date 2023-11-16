@@ -67,7 +67,7 @@
     "portal-vue": "^2.1.7",
     "probe-image-size": "^5.0.0",
     "request": "^2.88.2",
-    "sharp": "^0.25.2",
+    "sharp": "^0.32.6",
     "socket.io-client": "^2.3.0",
     "utf-8-validate": "^5.0.2",
     "vue": "^2.6.12",
